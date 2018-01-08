@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.js"></script>-->
+    <style>
+        
+        article > div {
+            background: #000;
+            height: 50px;
+            width: 50px;
+            margin: 4px;
+            float: left;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <script type="text/babel">
+
+       for(var i = 0; i < 10; i++) {
+           var box = document.createElemaent("div");
+
+           box.onclick = function() {
+               console.log("Hey I am box number " + i);
+           }
+
+           document.getElementByTagName('article')[0].appendChild(box);
+       }
+
+    </script>
+
+    <article></article>
+</body>
+</html>
