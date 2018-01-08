@@ -1,3 +1,6 @@
+import { error } from "util";
+// import { resolve } from "dns";
+
 //const name = "Agnes is great programmer";
 
 ///////////////////////////////// TEMPLATE LITERALS /////////////////////////////////
@@ -213,4 +216,145 @@ console.log(displayData(Aga));
 //////////////////////////////////// CLASSES /////////////////////////////////////
 //////////////////////////////////// CLASSES /////////////////////////////////////
 
+class Person {
+    constructor(name, title) {
+        this.name = name;
+        this.title = title;
+    }
+    displayInfo() {
+        console.log(`${this.name} is a great ${this.title}`);
+    }
+}
 
+let object = new Person("Anna", "Professor");
+displayInfo();
+
+//////////////////////////////////// CLASS INHERITANCE /////////////////////////////////////
+
+class Spicies {
+    constructor(name, title) {
+        this.name = name;
+        this.title = title;
+    }
+    displayInfo() {
+        console.log(`${this.name} is a great ${this.title}`);
+    }
+}
+
+class Alien extends Spicies {
+    constructor() {
+        super("Rico", "Web Developer");
+    }
+}
+
+let alien = new Alien();
+alien.displayInfo();
+
+//////////////////////////////////// DEFINING PROMISES /////////////////////////////////////
+//////////////////////////////////// ASYNCHRONOUS /////////////////////////////////////
+
+db.query("SELECT users", function(result) {
+    console.log(result);
+});
+console.log("do something else at the same time - asynchronous");
+//////////////////////////////////// PROMISES /////////////////////////////////////
+//////////////////////////////////// PROMISES /////////////////////////////////////
+//////////////////////////////////// PROMISES /////////////////////////////////////
+//////////////////////////////////// PROMISES /////////////////////////////////////
+//////////////////////////////////// PROMISES /////////////////////////////////////
+//////////////////////////////////// PROMISES /////////////////////////////////////
+
+let myPromise = (resolve, reject)=>{   // always 2 parameters - one for success and one for rejection
+    let isComplete = false; // or true;
+
+    if(isComplete) {
+        resolve("This will be resolve of completion");
+    } else {
+        reject("This is result of NOT completion");
+    }
+}
+
+//////////////////////////////////// USING PROMISES /////////////////////////////////////
+
+myPromise.then((result)=>{
+    console.log(result);
+}, (error)=>{
+    console.log(error);
+});
+
+//////////////////////////////////// CHAINING PROMISES /////////////////////////////////////
+
+let turnOnComputer = function() {
+    return new Promise((resolve, reject)=> {
+        resolve("Computer is on");
+    });
+};
+
+let openBrowser = function(msg) {
+    return new Promise((resolve, reject)=> {
+        resolve(msg + "Browser is open");
+    });
+};
+
+let goToThisPage= function(msg) {
+    return new Promise((resolve, reject)=>{
+        resolve(msg + "Go to eduweb.pl");
+    });
+};
+
+turnOnComputer().then((result)=>{
+    return openBrowser(result);
+}).then((result)=>{
+    return goToThisPage(result);
+}).then((result)=>{
+    console.log("We are done here " + result);
+});
+
+//////////////////////////////////// MORE CHAINING PROMISES AND ERROR HANDELING /////////////////////////////////////
+
+turnOnComputer().then((result)=>{
+    return openBrowser(result);
+}, (error)=>{
+    console.log(error);
+}).then((result)=>{
+    return goToThisPage(result);
+}, (error)=>{
+    console.log(error);
+}).then((result)=>{
+    console.log("We are done here " + result);
+});
+
+
+//////////////////////////////////// MORE CHAINING PROMISES AND ERROR CATCHING /////////////////////////////////////
+
+let turnOnMonitor = function() {
+    return new Promise((resolve, reject)=> {
+        resolve("Computer is on");
+    });
+};
+
+let openProgram = function(msg) {
+    return new Promise((resolve, reject)=> {
+        reject(msg + "Browser is failed");
+    });
+};
+
+let goToThisChanel= function(msg) {
+    return new Promise((resolve, reject)=>{
+        resolve(msg + "Go to eduweb.pl");
+    });
+};
+
+turnOnMonitor().then((result)=>{
+    return openProgram(result);
+}).then((result)=>{
+    return goToThisChanel(result);
+}).catch((errror)=>{
+    console.log(error);
+});
+
+// or
+
+Promise.all([turnOnMonitor(), openProgram(), goToThisChanel()]).then(function() { // but all promises must be resolve!!!!!
+    console.log("Done");
+});
